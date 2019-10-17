@@ -13,6 +13,7 @@
     "require": {
         "yiisoft/yii2": ">=2.0.13",
         "yiisoft/yii2-bootstrap": "*",
+        "npm-asset/syncfusion--ej2-base": "~17.3.14",
         "npm-asset/syncfusion--ej2-react-gantt": "~17.3.14"
     },
     "repositories": [
@@ -21,6 +22,11 @@
             "url": "https://asset-packagist.org"
         }
     ],
+    "config": {
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
     "autoload": {
         "psr-4": {
             "pkpudev\\widget\\": ""

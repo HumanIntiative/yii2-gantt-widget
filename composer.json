@@ -1,0 +1,29 @@
+{
+    "name": "pkpudev/yii2-gantt-widget",
+    "description": "Gantt Chart Widget using React",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","widget","gantt","react"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zein Miftah",
+            "email": "zmiftah@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": ">=2.0.13",
+        "yiisoft/yii2-bootstrap": "*",
+        "npm-asset/syncfusion--ej2-react-gantt": "~17.3.14"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "pkpudev\\widget\\": ""
+        }
+    }
+}

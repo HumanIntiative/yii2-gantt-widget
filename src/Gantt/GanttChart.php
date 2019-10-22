@@ -4,6 +4,8 @@ namespace pkpudev\widget\gantt;
 use yii\base\Widget;
 use yii\web\View;
 
+@require 'Convert_task.php';
+
 /**
  * Gantt widget
  * 
@@ -44,11 +46,12 @@ class GanttChart extends Widget
         $script = sprintf(
             "var ganttData = [ %s ];
              var ganttChart = new ej.gantt.Gantt({dataSource: ganttData});
-             ganttChart.appendTo('%s');",
+             ganttChart.appendTo(\"%s\");",
             $ganttData,
             $this->selector
         );
-        $this->view->registerJs($script, View::POS_READY, "gantt-js{$irand}");
+        // var_dump($script);
+        $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
     }
 
     /**
@@ -59,14 +62,10 @@ class GanttChart extends Widget
      */
     protected function convertCollection(Collection $ganttData): string
     {
-        return implode(
-            ',',
-            array_map(
-                function ($task) {
-                    return Convert_task($task, false);
-                },
-                (array)$ganttData
-            )
-        );
+        $tasks = [];
+        foreach ($ganttData as $task) {
+            array_push($tasks, Convert_task($task, false));
+        }
+        return implode(',', $tasks);
     }
 }

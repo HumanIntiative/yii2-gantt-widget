@@ -19,11 +19,11 @@ class Collection extends BaseObject implements IteratorAggregate, Countable
     /**
      * @var array $tasks
      */
-    protected $tasks;
+    protected $tasks = [];
 
     public function addTask(Task $task)
     {
-        array_push($this->tasks, $tasks);
+        array_push($this->tasks, $task);
     }
 
     public function getIterator()

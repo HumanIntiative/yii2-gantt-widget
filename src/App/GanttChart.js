@@ -1,4 +1,8 @@
-var ganttData = [
+import { GanttComponent } from '@syncfusion/ej2-react-gantt';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import './App.css';
+const GanttData = [
     {
         TaskID: 1,
         TaskName: 'Project Initiation',
@@ -6,7 +10,7 @@ var ganttData = [
         EndDate: new Date('04/21/2019'),
         subtasks: [
             { TaskID: 2, TaskName: 'Identify Site location', StartDate: new Date('04/02/2019'), Duration: 4, Progress: 50 },
-            { TaskID: 3, TaskName: 'Perform Soil test', StartDate: new Date('04/02/2019'), Duration: 4, Progress: 50  },
+            { TaskID: 3, TaskName: 'Perform Soil test', StartDate: new Date('04/02/2019'), Duration: 4, Progress: 50 },
             { TaskID: 4, TaskName: 'Soil test approval', StartDate: new Date('04/02/2019'), Duration: 4, Progress: 50 },
         ]
     },
@@ -22,5 +26,20 @@ var ganttData = [
         ]
     },
 ];
-var ganttChart = new ej.gantt.Gantt({dataSource: ganttData});
-ganttChart.appendTo('#Gantt');
+class App extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.taskFields = {
+            id: 'TaskID',
+            name: 'TaskName',
+            startDate: 'StartDate',
+            duration: 'Duration',
+            progress: 'Progress',
+            child: 'subtasks',
+        };
+    }
+    render() {
+        return (<GanttComponent dataSource={GanttData} height="450px" taskFields={this.taskFields}/>);
+    }
+}
+ReactDOM.render(<App />, document.getElementById('root'));

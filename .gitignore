@@ -1,3 +1,5 @@
 /.phpintel
+/src/App/node_modules
+/src/App/package-lock.json
 /vendor
 composer.lock

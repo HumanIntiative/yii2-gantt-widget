@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "pkpudev\\widget\\gantt\\": "src/Gantt/"
+            "pkpudev\\widget\\gantt\\": "src/"
         }
     }
 }

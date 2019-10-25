@@ -1,8 +1,8 @@
 <?php //src/Gantt/GanttChart.php
 namespace pkpudev\widget\gantt;
 
+use pkpudev\widget\gantt\assets\GanttAsset;
 use yii\base\Widget;
-use yii\web\View;
 
 @require 'Convert_task.php';
 
@@ -33,7 +33,7 @@ class GanttChart extends Widget
     {
         parent::init();
         // Register bundle
-        AssetBundle::register($this->view);
+        GanttAsset::register($this->view);
     }
 
     /**
@@ -51,7 +51,7 @@ class GanttChart extends Widget
             $this->selector
         );
         // var_dump($script);
-        $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
+        // $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
     }
 
     /**

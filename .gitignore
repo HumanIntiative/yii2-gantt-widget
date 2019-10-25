@@ -1,5 +1,6 @@
-/.phpintel
-/src/App/node_modules
-/src/App/package-lock.json
+/src/app/dist
+/src/app/node_modules
+/src/app/package-lock.json
+/src/app_xx
 /vendor
 composer.lock

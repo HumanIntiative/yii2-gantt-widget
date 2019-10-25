@@ -28,10 +28,18 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \pkpudev\widget\gantt\GanttChart::widget([]); ?>
+use pkpudev\widget\gantt\Collection;
+use pkpudev\widget\gantt\GanttChart;
+use pkpudev\widget\gantt\Task;
+
+$ganntCollection = new Collection();
+// Task 1
+$taskOne = new Task(['taskId'=>1, 'taskName'=>'My Task', 'startDate'=>'01/01/2019', 'endDate'=>'01/31/2019']);
+$taskOne->addSubtask(new Task(['taskId'=>2, 'taskName'=>'My Sub Task', 'startDate'=>'01/01/2019', 'duration'=>7, 'progress'=>14]));
+$ganntCollection->addTask($taskOne);
+
+echo GanttChart::widget([
+    'selector' => '#ganttId',
+    'ganttData' => new Collection(),
+]); ?>
 ```
-
-Setting React
------
-
-https://reactjs.org/docs/add-react-to-a-website.html

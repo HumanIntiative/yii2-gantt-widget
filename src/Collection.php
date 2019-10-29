@@ -1,5 +1,5 @@
-<?php //src/Gantt/Collection.php
-namespace pkpudev\widget\gantt;
+<?php //src/Collection.php
+namespace pkpudev\gantt;
 
 use ArrayIterator;
 use Countable;

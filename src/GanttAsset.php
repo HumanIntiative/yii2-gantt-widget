@@ -1,5 +1,5 @@
-<?php //src/assets/GanttAsset.php
-namespace pkpudev\widget\gantt\assets;
+<?php //src/GanttAsset.php
+namespace pkpudev\gantt;
 
 use yii\web\AssetBundle as BaseAssetBundle;
 use yii\web\View;

@@ -21,6 +21,11 @@ or add
 
 to the require section of your `composer.json` file.
 
+Reference
+----
+https://docs.dhtmlx.com/gantt/samples/01_initialization/04_save_rest.html
+https://docs.dhtmlx.com/gantt/desktop__server_side.html
+
 
 Usage
 -----

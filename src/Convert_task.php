@@ -1,5 +1,5 @@
-<?php //src/Gantt/Convert_Task.php
-namespace pkpudev\widget\gantt;
+<?php //src/Convert_Task.php
+namespace pkpudev\gantt;
 
 /**
  * Convert task object to js data string

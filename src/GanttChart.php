@@ -1,7 +1,7 @@
-<?php //src/Gantt/GanttChart.php
-namespace pkpudev\widget\gantt;
+<?php //src/GanttChart.php
+namespace pkpudev\gantt;
 
-use pkpudev\widget\gantt\assets\GanttAsset;
+use pkpudev\gantt\GanttAsset;
 use yii\base\Widget;
 use yii\web\View;
 
@@ -23,9 +23,9 @@ class GanttChart extends Widget
     public $selector = '#ganttId';
 
     /**
-     * @var Collection $ganttData
+     * @var string $apiUrl
      */
-    public $ganttData;
+    public $apiUrl = '/api';
 
     /**
      * @inheritdoc
@@ -43,42 +43,24 @@ class GanttChart extends Widget
     public function run()
     {
         $irand = rand(0, 1000);
-        $ganttData = $this->convertCollection($this->ganttData);
         $script = sprintf(
-            "gantt.message({
+            "/*gantt.message({
                 text: \"This example requires a RESTful API on the backend.\",
                 expire: -1
-            });
-            gantt.message({
-                text: \"You can also find our step-by-step tutorials for different platforms here\",
-                expire: -1
-            });
+            });*/
         
             gantt.config.xml_date = \"%%Y-%%m-%%d %%H:%%i:%%s\";
             gantt.init(\"%s\");
-            gantt.load(\"/gantt/backend/data\");
+            gantt.load(\"%s\");
         
             var dp = gantt.createDataProcessor({
-                url: \"/gantt/backend/data\",
+                url: \"%s\",
                 mode: \"REST\"
             });",
-            $this->selector
+            $this->selector,
+            $this->apiUrl,
+            $this->apiUrl
         );
         $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
-    }
-
-    /**
-     * Convert collection to js data string
-     * 
-     * @param Collection $ganttData
-     * @return string
-     */
-    protected function convertCollection(Collection $ganttData): string
-    {
-        $tasks = [];
-        foreach ($ganttData as $task) {
-            array_push($tasks, Convert_task($task, false));
-        }
-        return implode(',', $tasks);
     }
 }

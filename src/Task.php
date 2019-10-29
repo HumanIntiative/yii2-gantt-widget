@@ -1,5 +1,5 @@
-<?php //src/Gantt/Task.php
-namespace pkpudev\widget\gantt;
+<?php //src/Task.php
+namespace pkpudev\gantt;
 
 use yii\base\Component;
 

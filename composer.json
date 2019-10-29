@@ -1,8 +1,8 @@
 {
     "name": "pkpudev/yii2-gantt-widget",
-    "description": "Gantt Chart Widget using React",
+    "description": "Gantt Chart Widget",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension","widget","gantt","react"],
+    "keywords": ["yii2","extension","widget","gantt"],
     "license": "MIT",
     "authors": [
         {
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "pkpudev\\widget\\gantt\\": "src/"
+            "pkpudev\\gantt\\": "src/"
         }
     }
 }

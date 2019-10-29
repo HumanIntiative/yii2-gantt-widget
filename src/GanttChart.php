@@ -3,6 +3,7 @@ namespace pkpudev\widget\gantt;
 
 use pkpudev\widget\gantt\assets\GanttAsset;
 use yii\base\Widget;
+use yii\web\View;
 
 @require 'Convert_task.php';
 
@@ -44,14 +45,27 @@ class GanttChart extends Widget
         $irand = rand(0, 1000);
         $ganttData = $this->convertCollection($this->ganttData);
         $script = sprintf(
-            "var ganttData = [ %s ];
-             var ganttChart = new ej.gantt.Gantt({dataSource: ganttData});
-             ganttChart.appendTo(\"%s\");",
-            $ganttData,
+            "gantt.message({
+                text: \"This example requires a RESTful API on the backend.\",
+                expire: -1
+            });
+            gantt.message({
+                text: \"You can also find our step-by-step tutorials for different platforms here\",
+                expire: -1
+            });
+        
+            gantt.config.xml_date = \"%Y-%m-%d %H:%i:%s\";
+            gantt.init(\"%s\");
+            gantt.load(\"/gantt/backend/data\");
+        
+            var dp = gantt.createDataProcessor({
+                url: \"/gantt/backend/data\",
+                mode: \"REST\"
+            });",
             $this->selector
         );
         // var_dump($script);
-        // $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
+        $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
     }
 
     /**

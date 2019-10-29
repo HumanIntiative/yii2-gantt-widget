@@ -16,10 +16,13 @@ class GanttAsset extends BaseAssetBundle
 {
     public $sourcePath = '@vendor/pkpudev/yii2-gantt-widget';
 
+    public $css = [
+        'src/dhtmlx/dhtmlxgantt.css?v=6.2.7',
+    ];
     public $jsOptions = [
-        'position' => View::POS_END,
+        'position' => View::POS_BEGIN,
     ];
     public $js = [
-        'src/app/dist/build.js',
+        'src/dhtmlx/dhtmlxgantt.js?v=6.2.7',
     ];
 }

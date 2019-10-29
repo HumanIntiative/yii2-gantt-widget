@@ -54,7 +54,7 @@ class GanttChart extends Widget
                 expire: -1
             });
         
-            gantt.config.xml_date = \"%Y-%m-%d %H:%i:%s\";
+            gantt.config.xml_date = \"%%Y-%%m-%%d %%H:%%i:%%s\";
             gantt.init(\"%s\");
             gantt.load(\"/gantt/backend/data\");
         
@@ -64,7 +64,6 @@ class GanttChart extends Widget
             });",
             $this->selector
         );
-        // var_dump($script);
         $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
     }
 

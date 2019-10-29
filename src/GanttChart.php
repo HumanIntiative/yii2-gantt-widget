@@ -1,7 +1,6 @@
 <?php //src/GanttChart.php
 namespace pkpudev\gantt;
 
-use pkpudev\gantt\GanttAsset;
 use yii\base\Widget;
 use yii\web\View;
 

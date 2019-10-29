@@ -14,13 +14,17 @@ use yii\base\Component;
 class Task extends Component
 {
     /**
-     * @var int $taskId
+     * @var int $id
      */
-    public $taskId;
+    public $id;
     /**
-     * @var string $taskName
+     * @var int $parent
      */
-    public $taskName;
+    public $parent;
+    /**
+     * @var string $text
+     */
+    public $text;
     /**
      * @var string $startDate
      */
@@ -38,12 +42,30 @@ class Task extends Component
      */
     public $progress = 0;
     /**
+     * @var int $priority
+     */
+    public $priority = 0;
+    /**
+     * @var bool $open
+     */
+    public $open = 1;
+    /**
+     * @var string[] $usage
+     */
+    public $usage = [];
+    /**
+     * @var string[] $users
+     */
+    public $users = [];
+
+    /**
      * @var Task[] $subTasks
      */
     protected $subTasks = [];
 
     public function addSubtask(Task $subTask)
     {
+        $subTask->parent = $this->id;
         $this->subTasks[] = $subTask;
     }
 

@@ -50,6 +50,14 @@ class Task extends Component
      */
     public $open = 1;
     /**
+     * @var string $type;
+     */
+    public $type;
+    /**
+     * @var int $pic_id;
+     */
+    public $pic_id;
+    /**
      * @var string[] $usage
      */
     public $usage = [];

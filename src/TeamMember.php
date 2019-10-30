@@ -11,4 +11,8 @@ class TeamMember
      * @var string $memberName;
      */
     public $memberName;
+    /**
+     * @var string $initial;
+     */
+    public $initial;
 }

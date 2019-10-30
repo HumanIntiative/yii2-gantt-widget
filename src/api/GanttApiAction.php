@@ -1,9 +1,9 @@
 <?php //src/api/GanttApiAction.php
 namespace pkpudev\gantt\api;
 
-use pkpudev\gantt\model\DataComposer;
 use Yii;
 use yii\base\Action;
+use yii\web\ServerErrorHttpException;
 
 class GanttApiAction extends Action
 {
@@ -12,29 +12,28 @@ class GanttApiAction extends Action
     public function init()
     {
         parent::init();
-
-        $WbsExists = class_exists('\app\models\ProjectWbs');
-        $WbsProgressExists = class_exists('\app\models\ProjectWbsProgress');
-
-        if (!$WbsExists || !$WbsProgressExists) {
-            throw new \Exception("No WBS Model", 123);
-        }
+        $this->validateWbsModel();
     }
 
     public function run()
     {
         $request = Yii::$app->request;
 
-        $this->setHeader(200);
-
-        if ($pid = $request->getQueryParam('pid')) {
-            $dataComposer = new DataComposer($pid);
-            $json['data'] = $dataComposer->compose();
-            $json['link'] = [];
-        } else {
-            $json = ['data'=>[], 'link'=>[]];
+        $action = null;
+        if ($request->getIsGet()) {
+            $action = new ApiIndex;
+        } elseif ($request->getIsPost()) {
+            $action = new ApiCreate;
+        } elseif ($request->getIsPut()) {
+            $action = new ApiUpdate;
+        } elseif ($request->getIsDelete()) {
+            $action = new ApiDelete;
         }
 
-        echo json_encode($json, JSON_PRETTY_PRINT);
+        if ($action) {
+            $action->run();
+        } else {
+            throw new ServerErrorHttpException('Api Err');
+        }
     }
 }

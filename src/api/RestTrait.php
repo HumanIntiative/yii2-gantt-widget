@@ -8,6 +8,16 @@ namespace pkpudev\gantt\api;
  */
 trait RestTrait
 {
+    protected function validateWbsModel()
+    {
+        $WbsExists = class_exists('\app\models\ProjectWbs');
+        $WbsProgressExists = class_exists('\app\models\ProjectWbsProgress');
+
+        if (!$WbsExists || !$WbsProgressExists) {
+            throw new \Exception("No WBS Model", 123);
+        }
+    }
+
     protected function setHeader($statusCode)
     {
         $statusMessage = $this->getStatusCodeMessage($statusCode);

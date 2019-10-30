@@ -54,6 +54,8 @@ class GanttChart extends Widget
                 return \"\";
             }
 
+            gantt.config.grid_width = 400;
+            gantt.config.grid_resize = true;
             gantt.config.open_tree_initially = true;
             gantt.config.xml_date = \"%%Y-%%m-%%d %%H:%%i:%%s\";
 
@@ -63,15 +65,15 @@ class GanttChart extends Widget
             labels.column_owner = labels.section_owner = \"PIC\";
             
             gantt.config.columns = [
-                {name: \"owner\", width: 80, align: \"center\", template: function (item) {
-                    return byId(gantt.serverList('teamMember'), item.owner_id)}},
                 {name: \"text\", label: \"Task name\", tree: true, width: '*'},
+                {name: \"owner\", width: 80, align: \"center\", template: function (item) {
+                    return byId(gantt.serverList('teamMember'), item.pic_id)}},
                 {name: \"add\", width: 40}
             ];
 
             gantt.config.lightbox.sections = [
-                {name: \"description\", height: 38, map_to: \"text\", type: \"textarea\", focus: true},
-                {name: \"owner\", height: 22, map_to: \"owner_id\", type: \"select\", options: gantt.serverList(\"staff\")},
+                {name: \"description\", height: 50, map_to: \"text\", type: \"textarea\", focus: true},
+                {name: \"owner\", height: 36, map_to: \"pic_id\", type: \"select\", options: gantt.serverList(\"teamMember\")},
                 {name: \"time\", type: \"duration\", map_to: \"auto\"}
             ];
             

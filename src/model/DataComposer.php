@@ -5,7 +5,7 @@ use app\models\ProjectWbs;
 
 class DataComposer
 {
-    public $projectId;
+    protected $projectId;
 
     public function __construct(int $projectId)
     {

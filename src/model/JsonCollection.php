@@ -6,7 +6,7 @@ use pkpudev\gantt\Task;
 
 class JsonCollection
 {
-    public $collection;
+    protected $collection;
 
     public function __construct(Collection $collection)
     {

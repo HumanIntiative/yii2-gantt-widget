@@ -4,8 +4,6 @@ namespace pkpudev\gantt;
 use yii\base\Widget;
 use yii\web\View;
 
-@require 'Convert_task.php';
-
 /**
  * Gantt widget
  * 

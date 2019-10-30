@@ -6,7 +6,7 @@ use yii\db\ActiveRecordInterface;
 
 class WbsTransformer
 {
-    public $wbsModel;
+    protected $wbsModel;
 
     public function __construct(ActiveRecordInterface $wbsModel)
     {
@@ -22,19 +22,14 @@ class WbsTransformer
             'startDate' => 'start',
             'endDate' => 'finish',
             'duration' => 'duration',
-            'progress' => 'complete',
             'priority' => 'level',
         ];
 
         $newTask = new Task;
         foreach ($match as $kTask => $kWbs) {
             $newTask->{$kTask} = $this->wbsModel->{$kWbs};
-            /*
-            TODO: see pdg.project__wbs_progress
-            if ($kTask == 'progress') {
-                $newTask->progress = 0.5;
-            }*/
         }
+        $newTask->progress = WbsProgress::get($newTask);
         return $newTask;
     }
 }

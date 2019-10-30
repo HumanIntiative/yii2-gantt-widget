@@ -6,7 +6,7 @@ use yii\db\ActiveQueryInterface;
 
 class ActiveQueryTransformer
 {
-    public $activeQuery;
+    protected $activeQuery;
 
     public function __construct(ActiveQueryInterface $activeQuery)
     {

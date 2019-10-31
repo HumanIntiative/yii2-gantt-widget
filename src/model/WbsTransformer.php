@@ -1,7 +1,6 @@
 <?php //src/model/WbsTransformer.php
 namespace pkpudev\gantt\model;
 
-use pkpudev\gantt\Task;
 use yii\db\ActiveRecordInterface;
 
 class WbsTransformer

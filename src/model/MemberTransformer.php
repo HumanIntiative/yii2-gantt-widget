@@ -1,28 +1,26 @@
 <?php //src/model/MemberTransformer.php
 namespace pkpudev\gantt\model;
 
-use app\models\Employee;
-use pkpudev\gantt\TeamMember;
 use yii\db\ActiveQueryInterface;
 
 class MemberTransformer
 {
-    protected $activeQuery;
+    protected $query;
 
-    public function __construct(ActiveQueryInterface $activeQuery)
+    public function __construct(ActiveQueryInterface $query)
     {
-        $this->activeQuery = $activeQuery;
+        $this->query = $query;
     }
 
     public function transform(): array
     {
-        $rows = $this->activeQuery->all();
-        
+        $rows = $this->query->all();
+
         $members = [];
         foreach ($rows as $employee) {
-            $newMember = new TeamMember;
-            $newMember->memberId = $employee->id;
-            $newMember->memberName = $employee->full_name;
+            $newMember = new Member;
+            $newMember->id = $employee->id;
+            $newMember->name = $employee->full_name;
             $newMember->initial = $this->getInitial($employee->full_name);
             $members[] = $newMember;
         }

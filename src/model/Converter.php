@@ -1,22 +1,23 @@
 <?php //src/model/Converter.php
 namespace pkpudev\gantt\model;
 
-use pkpudev\gantt\TeamMember;
-
+/**
+ * Converter Helper class
+ */
 class Converter
 {
-    public static function teamMembersToString(array $members): string
+    public static function membersToString(array $members): string
     {
         return implode(
             ',', 
             array_map(
-                function (TeamMember $member) {
+                function (Member $member) {
                     return sprintf(
                         "{key:%s, label:'%s'}",
-                        $member->memberId,
-                        $member->memberName
+                        $member->id,
+                        $member->name
                     );
-                }, 
+                },
                 $members
             )
         );

@@ -2,7 +2,6 @@
 namespace pkpudev\gantt\model;
 
 use app\models\ProjectWbsProgress;
-use pkpudev\gantt\Task;
 
 class WbsProgress
 {

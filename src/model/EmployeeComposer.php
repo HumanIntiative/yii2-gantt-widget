@@ -3,7 +3,6 @@ namespace pkpudev\gantt\model;
 
 use app\models\Employee;
 use app\models\ProjectTeam;
-use pkpudev\gantt\TeamMember;
 
 class EmployeeComposer
 {

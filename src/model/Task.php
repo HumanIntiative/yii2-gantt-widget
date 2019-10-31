@@ -1,5 +1,5 @@
 <?php //src/Task.php
-namespace pkpudev\gantt;
+namespace pkpudev\gantt\model;
 
 use yii\base\Component;
 

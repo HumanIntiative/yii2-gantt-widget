@@ -1,9 +1,9 @@
-<?php //src/model/DataComposer.php
+<?php //src/model/TaskComposer.php
 namespace pkpudev\gantt\model;
 
 use app\models\ProjectWbs;
 
-class DataComposer
+class TaskComposer
 {
     protected $projectId;
 
@@ -17,9 +17,9 @@ class DataComposer
         $params = ['project_id'=>$this->projectId];
         $query = ProjectWbs::find()->where($params);
 
-        $activeQuery = new ActiveQueryTransformer($query);
-        $collection = $activeQuery->transform();
-        $json = new JsonCollection($collection);
+        $transformer = new TaskTransformer($query);
+        $collection = $transformer->transform();
+        $json = new JsonConverter($collection);
         return $json->getData();
     }
 }

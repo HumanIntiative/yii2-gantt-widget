@@ -1,7 +1,7 @@
 <?php //src/api/ApiIndex.php
 namespace pkpudev\gantt\api;
 
-use pkpudev\gantt\model\DataComposer;
+use pkpudev\gantt\model\TaskComposer;
 use Yii;
 
 class ApiIndex
@@ -15,8 +15,8 @@ class ApiIndex
         $this->setHeader(200);
 
         if ($pid = $request->getQueryParam('pid')) {
-            $dataComposer = new DataComposer($pid);
-            $json['data'] = $dataComposer->compose();
+            $composer = new TaskComposer($pid);
+            $json['data'] = $composer->compose();
             $json['link'] = [];
         } else {
             $json = ['data'=>[], 'link'=>[]];

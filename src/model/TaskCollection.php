@@ -1,5 +1,5 @@
-<?php //src/Collection.php
-namespace pkpudev\gantt;
+<?php //src/TaskCollection.php
+namespace pkpudev\gantt\model;
 
 use ArrayIterator;
 use Countable;
@@ -14,7 +14,7 @@ use yii\base\BaseObject;
  * @author Zein Miftah <zeinmiftah@gmail.com>
  * @since 1.0
  */
-class Collection extends BaseObject implements IteratorAggregate, Countable
+class TaskCollection extends BaseObject implements IteratorAggregate, Countable
 {
     /**
      * @var array $tasks

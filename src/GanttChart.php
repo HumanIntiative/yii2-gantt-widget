@@ -24,7 +24,7 @@ class GanttChart extends Widget
      */
     public $apiUrl = '/api';
     /**
-     * @var TeamMember[] $members
+     * @var model\Member[] $members
      */
     public $members = [];
 
@@ -44,7 +44,7 @@ class GanttChart extends Widget
     public function run()
     {
         $irand = rand(0, 1000);
-        $members = Converter::teamMembersToString($this->members);
+        $members = Converter::membersToString($this->members);
         $template = "
             function byId(list, id) {
                 for (var i = 0; i < list.length; i++) {
@@ -59,7 +59,7 @@ class GanttChart extends Widget
             gantt.config.open_tree_initially = true;
             gantt.config.xml_date = \"%%Y-%%m-%%d %%H:%%i:%%s\";
 
-            gantt.serverList(\"teamMember\", [%s]);
+            gantt.serverList(\"members\", [%s]);
 
             var labels = gantt.locale.labels;
             labels.column_owner = labels.section_owner = \"PIC\";
@@ -67,13 +67,13 @@ class GanttChart extends Widget
             gantt.config.columns = [
                 {name: \"text\", label: \"Task name\", tree: true, width: '*'},
                 {name: \"owner\", width: 80, align: \"center\", template: function (item) {
-                    return byId(gantt.serverList('teamMember'), item.pic_id)}},
+                    return byId(gantt.serverList('members'), item.pic_id)}},
                 {name: \"add\", width: 40}
             ];
 
             gantt.config.lightbox.sections = [
                 {name: \"description\", height: 50, map_to: \"text\", type: \"textarea\", focus: true},
-                {name: \"owner\", height: 36, map_to: \"pic_id\", type: \"select\", options: gantt.serverList(\"teamMember\")},
+                {name: \"owner\", height: 36, map_to: \"pic_id\", type: \"select\", options: gantt.serverList(\"members\")},
                 {name: \"time\", type: \"duration\", map_to: \"auto\"}
             ];
             

@@ -1,26 +1,23 @@
-<?php //src/model/JsonCollection.php
+<?php //src/model/JsonConverter.php
 namespace pkpudev\gantt\model;
 
-use pkpudev\gantt\Collection;
-use pkpudev\gantt\Task;
-
-class JsonCollection
+class JsonConverter
 {
-    protected $collection;
+    protected $taskCollection;
 
-    public function __construct(Collection $collection)
+    public function __construct(TaskCollection $taskCollection)
     {
-        $this->collection = $collection;
+        $this->taskCollection = $taskCollection;
     }
 
     public function getData(): array
     {
-        if ($this->collection->count() == 0) {
+        if ($this->taskCollection->count() == 0) {
             return [];
         }
 
         $data = [];
-        foreach ($this->collection as $task) {
+        foreach ($this->taskCollection as $task) {
             $data[] = [
                 'id' => $task->id,
                 'parent' => $task->parent,

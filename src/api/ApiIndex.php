@@ -1,7 +1,7 @@
 <?php //src/api/ApiIndex.php
 namespace pkpudev\gantt\api;
 
-use pkpudev\gantt\model\TaskComposer;
+use pkpudev\gantt\composer\TaskComposer;
 use Yii;
 
 class ApiIndex

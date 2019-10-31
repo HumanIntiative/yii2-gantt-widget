@@ -1,7 +1,9 @@
-<?php //src/model/TaskComposer.php
-namespace pkpudev\gantt\model;
+<?php //src/composer/TaskComposer.php
+namespace pkpudev\gantt\composer;
 
 use app\models\ProjectWbs;
+use pkpudev\gantt\converter\JsonConverter;
+use pkpudev\gantt\transformer\TaskTransformer;
 
 class TaskComposer
 {

@@ -1,4 +1,4 @@
-<?php //src/Task.php
+<?php //src/model/Task.php
 namespace pkpudev\gantt\model;
 
 use yii\base\Component;
@@ -65,20 +65,4 @@ class Task extends Component
      * @var string[] $users
      */
     public $users = [];
-
-    /**
-     * @var Task[] $subTasks
-     */
-    protected $subTasks = [];
-
-    public function addSubtask(Task $subTask)
-    {
-        $subTask->parent = $this->id;
-        $this->subTasks[] = $subTask;
-    }
-
-    public function getSubtask(): array
-    {
-        return $this->subTasks;
-    }
 }

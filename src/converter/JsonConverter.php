@@ -1,5 +1,7 @@
-<?php //src/model/JsonConverter.php
-namespace pkpudev\gantt\model;
+<?php //src/converter/JsonConverter.php
+namespace pkpudev\gantt\converter;
+
+use pkpudev\gantt\model\TaskCollection;
 
 class JsonConverter
 {

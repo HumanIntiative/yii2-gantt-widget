@@ -1,7 +1,7 @@
 <?php //src/GanttChart.php
 namespace pkpudev\gantt;
 
-use pkpudev\gantt\model\Converter;
+use pkpudev\gantt\converter\MemberConverter;
 use yii\base\Widget;
 use yii\web\View;
 
@@ -44,7 +44,7 @@ class GanttChart extends Widget
     public function run()
     {
         $irand = rand(0, 1000);
-        $members = Converter::membersToString($this->members);
+        $members = (new MemberConverter($this->members))->toString();
         $template = "
             function byId(list, id) {
                 for (var i = 0; i < list.length; i++) {

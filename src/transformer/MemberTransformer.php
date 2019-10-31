@@ -1,6 +1,7 @@
-<?php //src/model/MemberTransformer.php
-namespace pkpudev\gantt\model;
+<?php //src/transformer/MemberTransformer.php
+namespace pkpudev\gantt\transformer;
 
+use pkpudev\gantt\model\Member;
 use yii\db\ActiveQueryInterface;
 
 class MemberTransformer

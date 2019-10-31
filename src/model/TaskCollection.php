@@ -1,4 +1,4 @@
-<?php //src/TaskCollection.php
+<?php //src/model/TaskCollection.php
 namespace pkpudev\gantt\model;
 
 use ArrayIterator;

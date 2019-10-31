@@ -1,6 +1,7 @@
-<?php //src/model/TaskTransformer.php
-namespace pkpudev\gantt\model;
+<?php //src/transformer/TaskTransformer.php
+namespace pkpudev\gantt\transformer;
 
+use pkpudev\gantt\model\TaskCollection;
 use yii\db\ActiveQueryInterface;
 
 class TaskTransformer

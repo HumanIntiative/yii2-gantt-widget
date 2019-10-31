@@ -1,8 +1,9 @@
-<?php //src/model/EmployeeComposer.php
-namespace pkpudev\gantt\model;
+<?php //src/composer/EmployeeComposer.php
+namespace pkpudev\gantt\composer;
 
 use app\models\Employee;
 use app\models\ProjectTeam;
+use pkpudev\gantt\transformer\MemberTransformer;
 
 class EmployeeComposer
 {

@@ -1,12 +1,21 @@
-<?php //src/model/Converter.php
-namespace pkpudev\gantt\model;
+<?php //src/converter/MemberConverter.php
+namespace pkpudev\gantt\converter;
+
+use pkpudev\gantt\model\Member;
 
 /**
- * Converter Helper class
+ * Member Converter
  */
-class Converter
+class MemberConverter
 {
-    public static function membersToString(array $members): string
+    protected $members;
+
+    public function __construct(array $members)
+    {
+        $this->members = $members;
+    }
+
+    public function toString(): string
     {
         return implode(
             ',', 
@@ -18,7 +27,7 @@ class Converter
                         $member->name
                     );
                 },
-                $members
+                $this->members
             )
         );
     }

@@ -1,4 +1,4 @@
-<?php //src/Member.php
+<?php //src/model/Member.php
 namespace pkpudev\gantt\model;
 
 class Member

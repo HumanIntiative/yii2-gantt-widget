@@ -18,10 +18,10 @@ class GanttUrlRules extends Behavior
     {
         $defaultRule = 'project/project/gantt_api';
         return [
-            'GET project/<pid:\d+>/gantt_api' => $defaultRule,
-            'POST project/<pid:\d+>/gantt_api/task' => $defaultRule,
-            'PUT project/<pid:\d+>/gantt_api/task/<tid:\d+>' => $defaultRule,
-            'DELETE project/<pid:\d+>/gantt_api/task/<tid:\d+>' => $defaultRule,
+            'project/<pid:\d+>/gantt_api' => $defaultRule,                //GET
+            'project/<pid:\d+>/gantt_api/task' => $defaultRule,           //POST
+            'project/<pid:\d+>/gantt_api/task/<tid:\d+>' => $defaultRule, //PUT
+            'project/<pid:\d+>/gantt_api/task/<tid:\d+>' => $defaultRule, //DELETE
         ];
     }
 }

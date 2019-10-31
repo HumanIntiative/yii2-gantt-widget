@@ -17,16 +17,18 @@ class GanttApiAction extends Action
 
     public function run()
     {
-        $request = Yii::$app->request;
+        $req = Yii::$app->request;
+
+        $parser = new PathInfoParser($req->getMethod(), $req->getPathInfo());
 
         $action = null;
-        if ($request->getIsGet()) {
+        if ($parser->isActionIndex()) {
             $action = new ApiIndex;
-        } elseif ($request->getIsPost()) {
+        } elseif ($parser->isActionCreate()) {
             $action = new ApiCreate;
-        } elseif ($request->getIsPut()) {
+        } elseif ($parser->isActionUpdate()) {
             $action = new ApiUpdate;
-        } elseif ($request->getIsDelete()) {
+        } elseif ($parser->isActionDelete()) {
             $action = new ApiDelete;
         }
 

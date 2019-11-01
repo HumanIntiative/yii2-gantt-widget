@@ -21,15 +21,27 @@ class ApiUpdate
     {
         $request = Yii::$app->request;
 
+        $post = $request->post();
         $transformer = new RequestTransformer($this->projectId, $request->post());
         $model = $transformer->getExistingModel($this->taskId);
 
-        if ($model->save()) {
-            $this->setHeader(200);
-            echo json_encode(['action'=>'updated'], JSON_PRETTY_PRINT);
-        } else {
-            $this->setHeader(400);
-            echo json_encode(['msg'=>'error'], JSON_PRETTY_PRINT);
+        $trx = Yii::$app->db->beginTransaction();
+        try {
+            if ($model->save()) {
+                (new PicUpdater($model, $post['pic_id']))->execute();
+                $trx->commit();
+
+                $this->setHeader(200);
+                echo json_encode(['action'=>'updated'], JSON_PRETTY_PRINT);
+            } else {
+                $trx->rollBack();
+
+                $this->setHeader(400);
+                echo json_encode(['msg'=>'error'], JSON_PRETTY_PRINT);
+            }
+        } catch (\Throwable $th) {
+            $trx->rollBack();
+            throw $th;
         }
     }
 }

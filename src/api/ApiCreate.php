@@ -19,15 +19,27 @@ class ApiCreate
     {
         $request = Yii::$app->request;
 
-        $transformer = new RequestTransformer($this->projectId, $request->post());
+        $post = $request->post();
+        $transformer = new RequestTransformer($this->projectId, $post);
         $model = $transformer->getNewModel();
 
-        if ($model->save()) {
-            $this->setHeader(201);
-            echo json_encode(['action'=>'inserted', 'tid'=>time()], JSON_PRETTY_PRINT);
-        } else {
-            $this->setHeader(400);
-            echo json_encode(['msg'=>'error'], JSON_PRETTY_PRINT);
+        $trx = Yii::$app->db->beginTransaction();
+        try {
+            if ($model->save()) {
+                (new PicUpdater($model, $post['pic_id']))->execute();
+                $trx->commit();
+
+                $this->setHeader(201);
+                echo json_encode(['action'=>'inserted', 'tid'=>time()], JSON_PRETTY_PRINT);
+            } else {
+                $trx->rollBack();
+
+                $this->setHeader(400);
+                echo json_encode(['msg'=>'error'], JSON_PRETTY_PRINT);
+            }
+        } catch (\Throwable $th) {
+            $trx->rollBack();
+            throw $th;
         }
     }
 }

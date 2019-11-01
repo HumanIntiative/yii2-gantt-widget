@@ -1,6 +1,7 @@
 <?php //src/api/PicUpdater.php
 namespace pkpudev\gantt\api;
 
+use app\models\Raci;
 use Yii;
 use yii\db\ActiveRecordInterface;
 
@@ -13,17 +14,21 @@ class PicUpdater
 
     public function __construct(ActiveRecordInterface $model, int $picId)
     {
-        $this->wbsId = $model->id;
+        $this->wbsId = (int)$model->id;
         $this->picId = $picId;
     }
 
     public function execute(): bool
     {
-        $sql = "INSERT INTO pdg.raci(wbs_id, employee_id, raci) VALUES(:wbs, :employee, :raci)";
-        $command = Yii::$app->db->createCommand($sql);
-        $command->bindParam(':wbs', $this->wbsId);
-        $command->bindParam(':employee', $this->picId);
-        $command->bindParam(':raci', self::TYPE_RESPONSIBLE);
-        return (bool)$command->execute();
+        $model = Raci::find()
+            ->where(['wbs_id'=>$this->wbsId])
+            ->one();
+        if (is_null($model)) {
+            $model = new Raci;
+            $model->wbs_id = $this->wbsId;
+            $model->raci = self::TYPE_RESPONSIBLE;
+        }
+        $model->employee_id = $this->picId;
+        return (bool)$model->save();
     }
 }

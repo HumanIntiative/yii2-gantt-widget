@@ -2,6 +2,7 @@
 namespace pkpudev\gantt\transformer;
 
 use pkpudev\gantt\model\Task;
+use pkpudev\gantt\model\WbsPic;
 use pkpudev\gantt\model\WbsProgress;
 use yii\db\ActiveRecordInterface;
 
@@ -31,6 +32,7 @@ class WbsTransformer
             $newTask->{$kTask} = $this->wbsModel->{$kWbs};
         }
         $newTask->progress = WbsProgress::get($newTask);
+        $newTask->pic_id = WbsPic::get($newTask);
         return $newTask;
     }
 }

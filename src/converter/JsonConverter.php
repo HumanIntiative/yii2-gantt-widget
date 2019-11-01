@@ -23,6 +23,7 @@ class JsonConverter
             $data[] = [
                 'id' => $task->id,
                 'parent' => $task->parent,
+                'pic_id' => $task->pic_id,
                 'text' => $task->text,
                 'start_date' => $task->startDate,
                 'duration' => (int)$task->duration,

@@ -31,7 +31,7 @@ class GanttApiAction extends Action
         } elseif ($parser->isActionUpdate()) {
             $action = new ApiUpdate($projectId, $taskId);
         } elseif ($parser->isActionDelete()) {
-            $action = new ApiDelete;
+            $action = new ApiDelete($projectId, $taskId);
         }
 
         if ($action) {

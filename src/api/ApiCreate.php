@@ -20,15 +20,13 @@ class ApiCreate
         $request = Yii::$app->request;
 
         $transformer = new RequestTransformer($this->projectId, $request->post());
-        $model = $transformer->transform();
-
-        var_dump($model->attributes);exit;
+        $model = $transformer->getNewModel();
 
         if ($model->save()) {
             $this->setHeader(201);
             echo json_encode(['action'=>'inserted', 'tid'=>time()], JSON_PRETTY_PRINT);
         } else {
-            $this->setHeader(201);
+            $this->setHeader(400);
             echo json_encode(['msg'=>'error'], JSON_PRETTY_PRINT);
         }
     }

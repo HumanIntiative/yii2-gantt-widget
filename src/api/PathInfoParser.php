@@ -34,6 +34,15 @@ class PathInfoParser
         return 0;
     }
 
+    public function getTaskId(): int
+    {
+        $pattern = '/^project\/\d+\/gantt_api\/task\/(\d+)/';
+        if (preg_match($pattern, $this->pathInfo, $res)) {
+            return (int)$res[1];
+        }
+        return 0;
+    }
+
     public function isActionIndex()
     {
         $validMethod = $this->method == 'GET';

@@ -1,6 +1,8 @@
 <?php //src/api/ApiIndex.php
 namespace pkpudev\gantt\api;
 
+use pkpudev\gantt\model\PicUpdater;
+use pkpudev\gantt\model\ProgressUpdater;
 use pkpudev\gantt\transformer\RequestTransformer;
 use Yii;
 
@@ -29,6 +31,7 @@ class ApiUpdate
         try {
             if ($model->save()) {
                 (new PicUpdater($model, $post['pic_id']))->execute();
+                (new ProgressUpdater($model, $post['progress']))->execute();
                 $trx->commit();
 
                 $this->setHeader(200);

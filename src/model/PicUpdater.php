@@ -1,8 +1,7 @@
-<?php //src/api/PicUpdater.php
-namespace pkpudev\gantt\api;
+<?php //src/model/PicUpdater.php
+namespace pkpudev\gantt\model;
 
 use app\models\Raci;
-use Yii;
 use yii\db\ActiveRecordInterface;
 
 class PicUpdater
@@ -20,6 +19,8 @@ class PicUpdater
 
     public function execute(): bool
     {
+        if ($this->picId <= 0) return false;
+
         $model = Raci::find()
             ->where(['wbs_id'=>$this->wbsId])
             ->one();

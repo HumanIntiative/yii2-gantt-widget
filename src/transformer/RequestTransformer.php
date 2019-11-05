@@ -27,7 +27,7 @@ class RequestTransformer
         return $this->mapping(ProjectWbs::findOne($id));
     }
 
-    protected function mapping($model): ProjectWbs
+    protected function mapping(ProjectWbs $model): ProjectWbs
     {
         $model->parent_id   = (int)$this->data['parent'];
         $model->project_id  = $this->projectId;

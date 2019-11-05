@@ -46,6 +46,12 @@ class GanttChart extends Widget
         $irand = rand(0, 1000);
         $members = (new MemberConverter($this->members))->toString();
         $template = "
+            var percent = [], key = 0;
+            for (var i=0; i<=10; i++) {
+                key = i / 10;
+                percent.push({key: key, label: (i * 10)+\" %%\"});
+            }
+
             function byId(list, id) {
                 for (var i = 0; i < list.length; i++) {
                     if (list[i].key == id)
@@ -63,6 +69,7 @@ class GanttChart extends Widget
 
             var labels = gantt.locale.labels;
             labels.column_owner = labels.section_owner = \"PIC\";
+            labels.column_progress = labels.section_progress = \"Progress\";
             
             gantt.config.columns = [
                 {name: \"text\", label: \"Task name\", tree: true, width: '*'},
@@ -74,6 +81,7 @@ class GanttChart extends Widget
             gantt.config.lightbox.sections = [
                 {name: \"description\", height: 50, map_to: \"text\", type: \"textarea\", focus: true},
                 {name: \"owner\", height: 36, map_to: \"pic_id\", type: \"select\", options: gantt.serverList(\"members\")},
+                {name: \"progress\", height: 36, map_to: \"progress\", type: \"radio\", options: percent},
                 {name: \"time\", type: \"duration\", map_to: \"auto\"}
             ];
             

@@ -20,6 +20,10 @@ class GanttChart extends Widget
      */
     public $selector = '#ganttId';
     /**
+     * @var string $zoomSelector
+     */
+    public $zoomSelector = '#zoom';
+    /**
      * @var string $apiUrl
      */
     public $apiUrl = '/api';
@@ -43,9 +47,51 @@ class GanttChart extends Widget
      */
     public function run()
     {
+        $this->createWidget();
+        $this->createZoomOptions();
+    }
+
+    public function createWidget()
+    {
         $irand = rand(0, 1000);
         $members = (new MemberConverter($this->members))->toString();
         $template = "
+            var zoomConfig = {
+                levels: [
+                    {
+                        name: \"day\",
+                        scale_height: 27,
+                        min_column_width: 80,
+                        scales: [
+                            {unit: \"day\", step: 1, format: \"%%d %%M\"}
+                        ]
+                    },
+                    {
+                        name: \"week\",
+                        scale_height: 50,
+                        min_column_width: 50,
+                        scales: [
+                            {unit: \"week\", step: 1, format: function (date) {
+                                var dateToStr = gantt.date.date_to_str(\"%%d %%M\");
+                                var endDate = gantt.date.add(date, -6, \"day\");
+                                var weekNum = gantt.date.date_to_str(\"%%W\")(date);
+                                return \"#\" + weekNum + \", \" + dateToStr(date) + \" - \" + dateToStr(endDate);
+                            }},
+                            {unit: \"day\", step: 1, format: \"%%j %%D\"}
+                        ]
+                    },
+                    {
+                        name: \"month\",
+                        scale_height: 50,
+                        min_column_width: 120,
+                        scales:[
+                            {unit: \"month\", format: \"%%F, %%Y\"},
+                            {unit: \"week\", format: \"Week #%%W\"}
+                        ]
+                    }
+                ]
+            }
+
             var percent = [], key = 0;
             for (var i=0; i<=10; i++) {
                 key = i / 10;
@@ -59,6 +105,9 @@ class GanttChart extends Widget
                 }
                 return \"\";
             }
+
+            gantt.ext.zoom.init(zoomConfig);
+            gantt.ext.zoom.setLevel(\"week\");
 
             gantt.config.grid_width = 400;
             gantt.config.grid_resize = true;
@@ -95,5 +144,21 @@ class GanttChart extends Widget
 
         $script = sprintf($template, $members, $this->selector, $this->apiUrl, $this->apiUrl);
         $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
+    }
+
+    public function createZoomOptions()
+    {
+        $template = "var htmlContent = '<form class=\"gantt_control\">' + 
+            '<input type=\"radio\" id=\"scale1\" class=\"gantt_radio\" name=\"scale\" value=\"day\">' +
+            '<label for=\"scale1\">Day scale</label>' +
+            '<input type=\"radio\" id=\"scale2\" class=\"gantt_radio\" name=\"scale\" value=\"week\" selected=\"selected\">' +
+            '<label for=\"scale2\">Week scale</label>' +
+            '<input type=\"radio\" id=\"scale3\" class=\"gantt_radio\" name=\"scale\" value=\"month\">' +
+            '<label for=\"scale3\">Month scale</label>' +
+        '</form>';
+        jQuery('%s').html(htmlContent);";
+
+        $script = sprintf($template, $this->zoomSelector);
+        $this->view->registerJs($script, View::POS_END, "gantt-js-zoom");
     }
 }

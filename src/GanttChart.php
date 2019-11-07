@@ -103,7 +103,11 @@ class GanttChart extends Widget
             var labels = gantt.locale.labels;
             labels.column_owner = labels.section_owner = \"PIC\";
             labels.column_progress = labels.section_progress = \"Progress\";
-            
+
+            gantt.templates.progress_text = function (start, end, task) {
+                return \"<span style='text-align:left;'>\" + Math.round(task.progress * 100) + \"%% </span>\";
+            };
+
             gantt.config.columns = [
                 {name: \"text\", label: \"Task name\", tree: true, width: '*'},
                 {name: \"owner\", width: 80, align: \"center\", template: function (item) {
@@ -117,7 +121,7 @@ class GanttChart extends Widget
                 {name: \"progress\", height: 36, map_to: \"progress\", type: \"radio\", options: percent},
                 {name: \"time\", type: \"duration\", map_to: \"auto\"}
             ];
-            
+
             gantt.init(\"%s\");
             gantt.load(\"%s\");
 

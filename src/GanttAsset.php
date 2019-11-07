@@ -19,7 +19,7 @@ class GanttAsset extends BaseAssetBundle
     public $css = [
         'src/dhtmlx/dhtmlxgantt.css?v=6.2.7',
         // 'src/dhtmlx/skins/dhtmlxgantt_material.css?v=6.2.7',
-        // 'src/assets/style.css',
+        'src/assets/style.css',
     ];
     public $jsOptions = [
         'position' => View::POS_BEGIN,

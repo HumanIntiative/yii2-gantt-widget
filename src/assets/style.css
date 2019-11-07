@@ -1,3 +1,9 @@
 .gantt_cal_light {
     height: 315px !important;
 }
+.weekend {
+    background: #E9E9EA;
+}
+.gantt_selected .weekend {
+    background: #B3B7BA;
+}

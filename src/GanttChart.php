@@ -32,6 +32,10 @@ class GanttChart extends Widget
      */
     public $useMarker = false;
     /**
+     * @var bool $useHighlight
+     */
+    public $useHighlight = false;
+    /**
      * @var string $apiUrl
      */
     public $apiUrl = '/api';
@@ -63,6 +67,9 @@ class GanttChart extends Widget
         }
         if ($this->useScale) {
             $script .= $this->createScaleOptions();
+        }
+        if ($this->useHighlight) {
+            $script .= $this->createHighlightOptions();
         }
 
         $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
@@ -204,5 +211,20 @@ class GanttChart extends Widget
                 text: \"Today\",
                 title: \"Today: \" + date_to_str(today)
             });";
+    }
+
+    public function createHighlightOptions()
+    {
+        return "
+            gantt.templates.scale_cell_class = function (date) {
+                if (date.getDay() == 0 || date.getDay() == 6) {
+                    return \"weekend\";
+                }
+            };
+            gantt.templates.timeline_cell_class = function (item, date) {
+                if (date.getDay() == 0 || date.getDay() == 6) {
+                    return \"weekend\"
+                }
+            };";
     }
 }

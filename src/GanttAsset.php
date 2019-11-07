@@ -26,5 +26,6 @@ class GanttAsset extends BaseAssetBundle
     ];
     public $js = [
         'src/dhtmlx/dhtmlxgantt.js?v=6.2.7',
+        'src/dhtmlx/ext/dhtmlxgantt_marker.js?v=6.2.7',
     ];
 }

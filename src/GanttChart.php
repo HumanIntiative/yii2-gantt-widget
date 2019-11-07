@@ -28,6 +28,10 @@ class GanttChart extends Widget
      */
     public $useScale = false;
     /**
+     * @var bool $useMarker
+     */
+    public $useMarker = false;
+    /**
      * @var string $apiUrl
      */
     public $apiUrl = '/api';
@@ -51,15 +55,21 @@ class GanttChart extends Widget
      */
     public function run()
     {
-        $this->createWidget();
-        if ($this->useScale) {
-            $this->createScaleOptions();
+        $irand = rand(0, 1000);
+
+        $script = $this->createWidget();
+        if ($this->useMarker) {
+            $script .= $this->createMarkerOptions();
         }
+        if ($this->useScale) {
+            $script .= $this->createScaleOptions();
+        }
+
+        $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
     }
 
     public function createWidget()
     {
-        $irand = rand(0, 1000);
         $members = (new MemberConverter($this->members))->toString();
         $template = "
             var percent = [], key = 0;
@@ -109,8 +119,7 @@ class GanttChart extends Widget
                 mode: \"REST\"
             });";
 
-        $script = sprintf($template, $members, $this->selector, $this->apiUrl, $this->apiUrl);
-        $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
+        return sprintf($template, $members, $this->selector, $this->apiUrl, $this->apiUrl);
     }
 
     public function createScaleOptions()
@@ -181,7 +190,19 @@ class GanttChart extends Widget
                 gantt.ext.zoom.setLevel(e.target.value);
             });";
 
-        $script = sprintf($template, $this->scaleSelector);
-        $this->view->registerJs($script, View::POS_END, "gantt-js-zoom");
+        return sprintf($template, $this->scaleSelector);
+    }
+
+    public function createMarkerOptions()
+    {
+        return "
+            var date_to_str = gantt.date.date_to_str(gantt.config.task_date);
+            var today = new Date;
+            gantt.addMarker({
+                start_date: today,
+                css: \"today\",
+                text: \"Today\",
+                title: \"Today: \" + date_to_str(today)
+            });";
     }
 }

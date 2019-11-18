@@ -25,6 +25,7 @@ class WbsTransformer
             'endDate' => 'finish',
             'duration' => 'duration',
             'priority' => 'level',
+            'order' => 'order_no',
         ];
 
         $newTask = new Task;

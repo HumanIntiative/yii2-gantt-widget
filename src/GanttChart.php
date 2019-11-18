@@ -98,6 +98,8 @@ class GanttChart extends Widget
             gantt.config.open_tree_initially = true;
             gantt.config.xml_date = \"%%Y-%%m-%%d %%H:%%i:%%s\";
 
+            gantt.config.sort = true;
+
             gantt.serverList(\"members\", [%s]);
 
             var labels = gantt.locale.labels;

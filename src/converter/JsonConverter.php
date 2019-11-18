@@ -33,6 +33,7 @@ class JsonConverter
                 'end_date' => $task->endDate,
                 'users' => $task->users,
                 'usage' => $task->usage,
+                'order' => (int)$task->order,
             ];
         }
         return $data;

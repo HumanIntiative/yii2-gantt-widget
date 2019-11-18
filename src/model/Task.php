@@ -58,6 +58,10 @@ class Task extends Component
      */
     public $pic_id;
     /**
+     * @var int $order
+     */
+    public $order;
+    /**
      * @var string[] $usage
      */
     public $usage = [];

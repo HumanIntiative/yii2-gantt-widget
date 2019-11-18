@@ -24,10 +24,6 @@ class GanttChart extends Widget
      */
     public $scaleSelector = '#scale';
     /**
-     * @var string $exportSelector
-     */
-    public $exportSelector = '#exportId';
-    /**
      * @var bool $useScale
      */
     public $useScale = false;
@@ -39,10 +35,6 @@ class GanttChart extends Widget
      * @var bool $useHighlight
      */
     public $useHighlight = false;
-    /**
-     * @var bool $useExportXls
-     */
-    public $useExportXls = false;
     /**
      * @var string $apiUrl
      */
@@ -78,9 +70,6 @@ class GanttChart extends Widget
         }
         if ($this->useHighlight) {
             $script .= $this->createHighlightOptions();
-        }
-        if ($this->useExportXls) {
-            $script .= $this->createExportOptions();
         }
 
         $this->view->registerJs($script, View::POS_END, "gantt-js{$irand}");
@@ -243,13 +232,5 @@ class GanttChart extends Widget
                     return \"weekend\"
                 }
             };";
-    }
-
-    public function createExportOptions()
-    {
-        return "
-            jQuery.on('click', '{$this->exportSelector}', function(e) {
-                gantt.exportToExcel();
-            })";
     }
 }

@@ -30,7 +30,7 @@ class ApiUpdate
         $trx = Yii::$app->db->beginTransaction();
         try {
             if ($model->save()) {
-                (new PicUpdater($model, $post['pic_id']))->execute();
+                (new PicUpdater($model, (int)$post['pic_id']))->execute();
                 (new ProgressUpdater($model, $post['progress']))->execute();
                 $trx->commit();
 
